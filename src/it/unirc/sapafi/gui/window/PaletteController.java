@@ -3,6 +3,8 @@ package it.unirc.sapafi.gui.window;
 import javax.swing.JInternalFrame;
 import javax.swing.JSplitPane;
 
+import it.unirc.sapafi.util.FrameService;
+
 public class PaletteController {
 
 	private JInternalFrame internalFrameGraphPalette;
@@ -12,7 +14,10 @@ public class PaletteController {
 		internalFrameGraphPalette.setClosable(true);
 		internalFrameGraphPalette.setVisible(true);
 		splitPane.setLeftComponent(internalFrameGraphPalette);
+		
+		FrameService frameService = new FrameService();
+		frameService.getSplitPaneParent().put(internalFrameGraphPalette, splitPane);
+		frameService.getListFrames().add(internalFrameGraphPalette);
 	}
 
-	
 }

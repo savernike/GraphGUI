@@ -15,18 +15,18 @@ public class SplitPaneController {
 
 	public SplitPaneController(JPanel contentPane) {
 		splitPaneMain = new JSplitPane();
-		splitPaneMain.setDividerSize(2);
+		splitPaneMain.setDividerSize(3);
 		splitPaneMain.setResizeWeight(0.8);
 		contentPane.add(splitPaneMain, "name_238976077871300");
 
 		splitPaneLeft = new JSplitPane();
-		splitPaneLeft.setDividerSize(2);
+		splitPaneLeft.setDividerSize(3);
 		splitPaneLeft.setResizeWeight(0.65);
 		splitPaneLeft.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPaneMain.setLeftComponent(splitPaneLeft);
 
 		splitPaneRight = new JSplitPane();
-		splitPaneRight.setDividerSize(2);
+		splitPaneRight.setDividerSize(3);
 		splitPaneRight.setResizeWeight(0.5);
 		splitPaneRight.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPaneMain.setRightComponent(splitPaneRight);
@@ -38,7 +38,7 @@ public class SplitPaneController {
 		consoleCtrl = new ConsoleController(splitPaneLeft);
 		
 		implMethodCtrl = new ImplMethodController(splitPaneRight);
-
+		
 	}
 
 	public DashboardController getDashboardCtrl() {

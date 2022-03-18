@@ -10,7 +10,7 @@ import javax.swing.JMenuItem;
 
 import it.unirc.sapafi.gui.MainGUI;
 import it.unirc.sapafi.gui.window.ConsoleController;
-import it.unirc.sapafi.gui.window.SplitPaneController;
+import it.unirc.sapafi.util.FrameService;
 
 public class MenuController {
 	private JMenu mnImport;
@@ -36,6 +36,8 @@ public class MenuController {
 		mntmConsole = new JMenuItem("Console");
 		mntmConsole.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(new FrameService().getSplitPaneParent().size());
+				System.out.println(new FrameService().getListFrames().size());
 			}
 		});
 		mnNewMenuWindow.add(mntmConsole);
@@ -44,7 +46,6 @@ public class MenuController {
 		mntmGraphPalette.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConsoleController console = new MainGUI().splitPaneCtrl.getConsoleCtrl();
-				console.changeVisibility();
 			}
 		});
 		mnNewMenuWindow.add(mntmGraphPalette);
