@@ -46,6 +46,8 @@ public class FrameService {
 	private void hideOrShowConsole(JInternalFrame frame) {
 		if(frame.isVisible()) {
 			// TODO
+		} else {
+			// TODO
 		}
 	}
 	
