@@ -10,7 +10,7 @@ import javax.swing.JMenuItem;
 
 import it.unirc.sapafi.gui.MainGUI;
 import it.unirc.sapafi.gui.window.ConsoleController;
-import it.unirc.sapafi.util.FrameService;
+import it.unirc.sapafi.service.FrameService;
 
 public class MenuController {
 	private JMenu mnImport;

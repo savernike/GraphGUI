@@ -3,7 +3,7 @@ package it.unirc.sapafi.gui.window;
 import javax.swing.JInternalFrame;
 import javax.swing.JSplitPane;
 
-import it.unirc.sapafi.util.FrameService;
+import it.unirc.sapafi.service.FrameService;
 
 public class ImplMethodController {
 
