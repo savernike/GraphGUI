@@ -1,13 +1,15 @@
 package it.unirc.sapafi.gui.window;
 
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JSplitPane;
 
 import it.unirc.sapafi.service.FrameService;
-
-import java.util.HashMap;
-
-import javax.swing.JFrame;
+import javax.swing.JToolBar;
+import java.awt.BorderLayout;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.JScrollPane;
 
 public class ConsoleController {
 
@@ -21,8 +23,13 @@ public class ConsoleController {
 		splitPane.setRightComponent(internalFrameConsole);
 		
 		FrameService frameService = new FrameService();
-		frameService.getSplitPaneParent().put(internalFrameConsole, splitPane);
 		frameService.getListFrames().add(internalFrameConsole);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		internalFrameConsole.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		
+		JList list = new JList();
+		scrollPane.setViewportView(list);
 	}
 	
 }

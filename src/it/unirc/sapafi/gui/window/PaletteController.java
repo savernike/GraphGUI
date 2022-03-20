@@ -16,7 +16,6 @@ public class PaletteController {
 		splitPane.setLeftComponent(internalFrameGraphPalette);
 		
 		FrameService frameService = new FrameService();
-		frameService.getSplitPaneParent().put(internalFrameGraphPalette, splitPane);
 		frameService.getListFrames().add(internalFrameGraphPalette);
 	}
 

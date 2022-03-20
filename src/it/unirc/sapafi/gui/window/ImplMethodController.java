@@ -1,13 +1,14 @@
 package it.unirc.sapafi.gui.window;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JInternalFrame;
 import javax.swing.JSplitPane;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 import it.unirc.sapafi.service.FrameService;
-import javax.swing.JTree;
-import java.awt.BorderLayout;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 public class ImplMethodController {
 
@@ -20,7 +21,6 @@ public class ImplMethodController {
 		splitPane.setRightComponent(internalFrameMethod);
 		
 		FrameService frameService = new FrameService();
-		frameService.getSplitPaneParent().put(internalFrameMethod, splitPane);
 		frameService.getListFrames().add(internalFrameMethod);
 		
 		JTree tree = new JTree();

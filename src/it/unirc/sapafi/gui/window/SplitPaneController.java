@@ -14,10 +14,11 @@ public class SplitPaneController {
 	private ImplMethodController implMethodCtrl;
 
 	public SplitPaneController(JPanel contentPane) {
+
 		splitPaneMain = new JSplitPane();
 		splitPaneMain.setDividerSize(3);
 		splitPaneMain.setResizeWeight(0.8);
-		contentPane.add(splitPaneMain, "name_238976077871300");
+		contentPane.add(splitPaneMain);
 
 		splitPaneLeft = new JSplitPane();
 		splitPaneLeft.setDividerSize(3);
@@ -30,15 +31,15 @@ public class SplitPaneController {
 		splitPaneRight.setResizeWeight(0.5);
 		splitPaneRight.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPaneMain.setRightComponent(splitPaneRight);
-		
+
 		dashboardCtrl = new DashboardController(splitPaneLeft);
-		
+
 		paletteCtrl = new PaletteController(splitPaneRight);
-		
+
 		consoleCtrl = new ConsoleController(splitPaneLeft);
-		
+
 		implMethodCtrl = new ImplMethodController(splitPaneRight);
-		
+
 	}
 
 	public DashboardController getDashboardCtrl() {
@@ -56,6 +57,5 @@ public class SplitPaneController {
 	public ImplMethodController getImplMethodCtrl() {
 		return implMethodCtrl;
 	}
-	
-	
+
 }

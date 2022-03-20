@@ -15,7 +15,6 @@ public class DashboardController {
 		splitPane.setLeftComponent(internalFrameDashboard);
 		
 		FrameService frameService = new FrameService();
-		frameService.getSplitPaneParent().put(internalFrameDashboard, splitPane);
 		frameService.getListFrames().add(internalFrameDashboard);
 	}
 

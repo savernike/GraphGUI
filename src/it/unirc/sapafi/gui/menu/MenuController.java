@@ -5,18 +5,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
-import it.unirc.sapafi.gui.MainGUI;
-import it.unirc.sapafi.gui.window.ConsoleController;
 import it.unirc.sapafi.gui.window.ImportJARFile;
-import it.unirc.sapafi.service.FrameService;
 
 public class MenuController {
 	private JMenu mnImport;
@@ -51,8 +45,7 @@ public class MenuController {
 		mntmConsole = new JMenuItem("Console");
 		mntmConsole.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(new FrameService().getSplitPaneParent().size());
-				System.out.println(new FrameService().getListFrames().size());
+				minimizeConsole();
 			}
 		});
 		mnNewMenuWindow.add(mntmConsole);
@@ -60,8 +53,8 @@ public class MenuController {
 		mntmGraphPalette = new JMenuItem("Graph palette");
 		mntmGraphPalette.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ConsoleController console = new MainGUI().splitPaneCtrl.getConsoleCtrl();
 			}
+
 		});
 		mnNewMenuWindow.add(mntmGraphPalette);
 
@@ -80,5 +73,10 @@ public class MenuController {
 
 		mnNewMenuInfo = new JMenu("Info");
 		menuBar.add(mnNewMenuInfo);
+	}
+	
+	
+	private void minimizeConsole() {
+		
 	}
 }

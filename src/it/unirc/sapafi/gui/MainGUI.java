@@ -17,6 +17,11 @@ import java.awt.Toolkit;
 
 public class MainGUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6304487844265567838L;
+	
 	private JPanel contentPane;
 	private JMenuBar menuBar;
 	public SplitPaneController splitPaneCtrl;
