@@ -9,6 +9,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
 import it.unirc.sapafi.service.FrameService;
+import javax.swing.JTextPane;
+import javax.swing.DropMode;
+import java.awt.Cursor;
 
 public class ConsoleController {
 
@@ -27,8 +30,13 @@ public class ConsoleController {
 		JScrollPane scrollPane = new JScrollPane();
 		internalFrameConsole.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
-		JList list = new JList();
-		scrollPane.setViewportView(list);
+		JTextPane txtpnFrgeg = new JTextPane();
+		txtpnFrgeg.setText("frgeg");
+		//ternary operation (another way to do if/else) (condition ? isTrue : isFalse)
+		txtpnFrgeg.setCursor(Cursor.getPredefinedCursor(txtpnFrgeg.getText().length() != 0 ? Cursor.TEXT_CURSOR : Cursor.DEFAULT_CURSOR));
+		txtpnFrgeg.setDropMode(DropMode.INSERT);
+		txtpnFrgeg.setEditable(false);
+		scrollPane.setViewportView(txtpnFrgeg);
 	}
 	
 }

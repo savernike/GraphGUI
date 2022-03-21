@@ -6,11 +6,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import it.unirc.sapafi.gui.window.ImportFile;
+import it.unirc.sapafi.service.FrameService;
 
 public class MenuController {
 	private JMenu mnImport;
@@ -75,6 +77,8 @@ public class MenuController {
 	
 	
 	private void minimizeConsole() {
-		
+		FrameService frameService = new FrameService();
+		JInternalFrame console = frameService.getListFrames().get(frameService.getFramePosInList("Console"));
+		// TODO
 	}
 }
