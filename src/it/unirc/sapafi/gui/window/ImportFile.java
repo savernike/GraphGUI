@@ -19,11 +19,11 @@ public class ImportFile {
 			String nameFile = fileChooser.getSelectedFile().getName();
 			String absolutePathFile = fileChooser.getSelectedFile().getAbsolutePath();
 			String absolutePathDir = absolutePathFile.substring(0, absolutePathFile.lastIndexOf("\\"));
-			String[] extension = { "exe" };
+			String[] extension = { "jar" };
 			if (!checkExtensions(extension, nameFile)) {
 				JOptionPane.showMessageDialog(null, "Il formato selezionato è invalido");
 				System.out.println(absolutePathDir);
-				fileChooser = new JFileChooser(absolutePathDir);
+				fileChooser = new JFileChooser();
 			}
 		}
 	}
