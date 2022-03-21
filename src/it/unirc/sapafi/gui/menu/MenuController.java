@@ -44,7 +44,6 @@ public class MenuController {
 		mntmConsole.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				minimizeConsole();
-				System.out.println();
 			}
 		});
 		mnNewMenuWindow.add(mntmConsole);
