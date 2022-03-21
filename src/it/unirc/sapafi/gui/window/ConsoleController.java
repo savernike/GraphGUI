@@ -30,13 +30,12 @@ public class ConsoleController {
 		JScrollPane scrollPane = new JScrollPane();
 		internalFrameConsole.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
-		JTextPane txtpnFrgeg = new JTextPane();
-		txtpnFrgeg.setText("frgeg");
+		JTextPane textPane = new JTextPane();
 		//ternary operation (another way to do if/else) (condition ? isTrue : isFalse)
-		txtpnFrgeg.setCursor(Cursor.getPredefinedCursor(txtpnFrgeg.getText().length() != 0 ? Cursor.TEXT_CURSOR : Cursor.DEFAULT_CURSOR));
-		txtpnFrgeg.setDropMode(DropMode.INSERT);
-		txtpnFrgeg.setEditable(false);
-		scrollPane.setViewportView(txtpnFrgeg);
+		textPane.setCursor(Cursor.getPredefinedCursor(textPane.getText().length() != 0 ? Cursor.TEXT_CURSOR : Cursor.DEFAULT_CURSOR));
+		textPane.setDropMode(DropMode.INSERT);
+		textPane.setEditable(false);
+		scrollPane.setViewportView(textPane);
 	}
 	
 }
