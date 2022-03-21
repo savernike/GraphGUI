@@ -10,7 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import it.unirc.sapafi.gui.window.ImportJARFile;
+import it.unirc.sapafi.gui.window.ImportFile;
 
 public class MenuController {
 	private JMenu mnImport;
@@ -31,9 +31,7 @@ public class MenuController {
 		mnImport.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ImportJARFile jfc = new ImportJARFile();
-				jfc.showOpenDialog(null);
-
+				ImportFile importFile = new ImportFile();
 			}
 		});
 
