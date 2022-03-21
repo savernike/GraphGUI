@@ -9,6 +9,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import it.unirc.sapafi.service.FrameService;
+import javax.swing.ImageIcon;
 
 public class ImplMethodController {
 
@@ -16,6 +17,7 @@ public class ImplMethodController {
 
 	public ImplMethodController(JSplitPane splitPane) {
 		internalFrameMethod = new JInternalFrame("Graph Implemented Method");
+		internalFrameMethod.setFrameIcon(new ImageIcon(ImplMethodController.class.getResource("/it/unirc/sapafi/img/impl_method_icon.png")));
 		internalFrameMethod.setClosable(true);
 		internalFrameMethod.setVisible(true);
 		splitPane.setRightComponent(internalFrameMethod);

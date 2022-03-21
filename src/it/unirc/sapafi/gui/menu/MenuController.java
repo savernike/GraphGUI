@@ -10,6 +10,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import it.unirc.sapafi.gui.window.ImportFile;
 import it.unirc.sapafi.service.FrameService;
@@ -24,8 +26,11 @@ public class MenuController {
 	private JMenu mnPreferences;
 	private JMenu mnNewMenuInfo;
 	private JMenuBar menuBar;
+	private JMenuItem mntmLayout;
+	private JFrame frame;
 
 	public MenuController(JFrame frame) {
+		this.frame = frame;
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
@@ -70,12 +75,25 @@ public class MenuController {
 
 		mnPreferences = new JMenu("Preferences");
 		menuBar.add(mnPreferences);
+		
+		mntmLayout = new JMenuItem("Layout");
+		mntmLayout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setWindowsLayout();
+			}
+		});
+		mnPreferences.add(mntmLayout);
 
 		mnNewMenuInfo = new JMenu("Info");
 		menuBar.add(mnNewMenuInfo);
 	}
 	
 	
+	protected void setWindowsLayout() {
+		
+	}
+
+
 	private void minimizeConsole() {
 		FrameService frameService = new FrameService();
 		JInternalFrame console = frameService.getListFrames().get(frameService.getFramePosInList("Console"));

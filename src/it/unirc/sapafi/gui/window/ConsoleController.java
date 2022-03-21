@@ -12,6 +12,7 @@ import it.unirc.sapafi.service.FrameService;
 import javax.swing.JTextPane;
 import javax.swing.DropMode;
 import java.awt.Cursor;
+import javax.swing.ImageIcon;
 
 public class ConsoleController {
 
@@ -19,6 +20,7 @@ public class ConsoleController {
 
 	public ConsoleController(JSplitPane splitPane) {
 		internalFrameConsole = new JInternalFrame("Console");
+		internalFrameConsole.setFrameIcon(new ImageIcon(ConsoleController.class.getResource("/it/unirc/sapafi/img/console_icon.png")));
 		internalFrameConsole.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		internalFrameConsole.setClosable(true);
 		internalFrameConsole.setVisible(true);
