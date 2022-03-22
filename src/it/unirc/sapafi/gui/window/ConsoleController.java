@@ -9,6 +9,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
 import it.unirc.sapafi.service.FrameService;
+import javax.swing.JTextPane;
+import javax.swing.DropMode;
+import java.awt.Cursor;
+import javax.swing.ImageIcon;
 
 public class ConsoleController {
 
@@ -16,6 +20,7 @@ public class ConsoleController {
 
 	public ConsoleController(JSplitPane splitPane) {
 		internalFrameConsole = new JInternalFrame("Console");
+		internalFrameConsole.setFrameIcon(new ImageIcon(ConsoleController.class.getResource("/it/unirc/sapafi/img/console_icon.png")));
 		internalFrameConsole.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		internalFrameConsole.setClosable(true);
 		internalFrameConsole.setVisible(true);
@@ -27,8 +32,12 @@ public class ConsoleController {
 		JScrollPane scrollPane = new JScrollPane();
 		internalFrameConsole.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
-		JList list = new JList();
-		scrollPane.setViewportView(list);
+		JTextPane textPane = new JTextPane();
+		//ternary operation (another way to do if/else) (condition ? isTrue : isFalse)
+		textPane.setCursor(Cursor.getPredefinedCursor(textPane.getText().length() != 0 ? Cursor.TEXT_CURSOR : Cursor.DEFAULT_CURSOR));
+		textPane.setDropMode(DropMode.INSERT);
+		textPane.setEditable(false);
+		scrollPane.setViewportView(textPane);
 	}
 	
 }

@@ -7,15 +7,12 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-
-import javax.swing.JSplitPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import it.unirc.sapafi.gui.menu.MenuController;
 import it.unirc.sapafi.gui.window.SplitPaneController;
-
 
 public class MainGUI extends JFrame {
 
@@ -37,11 +34,9 @@ public class MainGUI extends JFrame {
 	 * @throws ClassNotFoundException 
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-
 		
-		UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		
-
 		EventQueue.invokeLater(new Runnable() {
 
 			public void run() {
