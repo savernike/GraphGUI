@@ -1,14 +1,11 @@
 package it.unirc.sapafi.gui.window;
 
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ImportFile {
 
 	private JFileChooser fileChooser;
-
-
 
 	public ImportFile() {
 		fileChooser = new JFileChooser();
