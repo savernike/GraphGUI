@@ -18,7 +18,7 @@ public class ImportFile {
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("JAR Files", "jar");
 			fileChooser.setFileFilter(filter);
 			returnValue = fileChooser.showDialog(null, "Select JAR");
-			System.out.println(returnValue);
+//			System.out.println(returnValue);
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				String nameFile = fileChooser.getSelectedFile().getName();
 				String absolutePathFile = fileChooser.getSelectedFile().getAbsolutePath();
