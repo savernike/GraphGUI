@@ -13,10 +13,12 @@ import javax.swing.JTextPane;
 import javax.swing.DropMode;
 import java.awt.Cursor;
 import javax.swing.ImageIcon;
+import javax.swing.AbstractListModel;
 
 public class ConsoleController {
 
 	private JInternalFrame internalFrameConsole;
+	private JList listCommands;
 
 	public ConsoleController(JSplitPane splitPane) {
 		internalFrameConsole = new JInternalFrame("Console");
@@ -32,12 +34,12 @@ public class ConsoleController {
 		JScrollPane scrollPane = new JScrollPane();
 		internalFrameConsole.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
-		JTextPane textPane = new JTextPane();
-		//ternary operation (another way to do if/else) (condition ? isTrue : isFalse)
-		textPane.setCursor(Cursor.getPredefinedCursor(textPane.getText().length() != 0 ? Cursor.TEXT_CURSOR : Cursor.DEFAULT_CURSOR));
-		textPane.setDropMode(DropMode.INSERT);
-		textPane.setEditable(false);
-		scrollPane.setViewportView(textPane);
+		listCommands = new JList();
+		scrollPane.setViewportView(listCommands);
+	}
+
+	public JList getList() {
+		return listCommands;
 	}
 	
 }
