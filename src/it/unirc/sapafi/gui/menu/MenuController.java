@@ -31,7 +31,15 @@ public class MenuController {
 		mnImport.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ImportFile importFile = new ImportFile();
+				mnImport.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+
+						ImportFile jfc = new ImportFile();
+
+					}
+				});
+
 			}
 		});
 
