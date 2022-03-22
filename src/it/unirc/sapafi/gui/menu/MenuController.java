@@ -34,22 +34,14 @@ public class MenuController {
 
 		mnImport = new JMenu("Import");
 		mnImport.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				mnImport.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
+			
+				
 
-						ImportFile jfc = new ImportFile();
-						
-						
-
-					}
-				});
-
+			public void mousePressed(MouseEvent e) {
+				ImportFile jfc = new ImportFile();
 			}
 		});
-
+		
 		menuBar.add(mnImport);
 
 		mnNewMenuWindow = new JMenu("Window");
