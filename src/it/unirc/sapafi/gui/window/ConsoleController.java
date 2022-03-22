@@ -39,7 +39,7 @@ public class ConsoleController {
 		testo = new JTextArea();
 		testo.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		testo.setEditable(false);
-		testo.setText("Benvenuto in GraphGUI\r\n");
+		testo.setText("Benvenuto/a in GraphGUI\r\n");
 		scrollPane.setViewportView(testo);
 		
 		
