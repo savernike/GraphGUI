@@ -23,6 +23,10 @@ public class ImportFile {
 				String absolutePathFile = fileChooser.getSelectedFile().getAbsolutePath();
 				String[] extension = { "jar" };
 				correctExt = checkExtensions(extension, nameFile);
+				// System.out.println(absolutePathFile);
+				
+				LoaderJAR(absolutePathFile);
+
 				if (!correctExt) {
 					JOptionPane.showMessageDialog(null, "L'unica estensione possibile è .jar", "Estensione non valida",
 							JOptionPane.ERROR_MESSAGE);
@@ -42,6 +46,11 @@ public class ImportFile {
 			}
 		}
 		return res;
+	}
+
+	private void LoaderJAR(String path) {
+		ClassLoader.getSystemResource(path);
+		//TODO
 	}
 
 }

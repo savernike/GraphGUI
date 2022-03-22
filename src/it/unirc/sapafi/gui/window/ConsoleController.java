@@ -14,11 +14,13 @@ import javax.swing.DropMode;
 import java.awt.Cursor;
 import javax.swing.ImageIcon;
 import javax.swing.AbstractListModel;
+import javax.swing.JTextArea;
+import java.awt.Font;
 
 public class ConsoleController {
 
 	private JInternalFrame internalFrameConsole;
-	private JList listCommands;
+	private JTextArea testo;
 
 	public ConsoleController(JSplitPane splitPane) {
 		internalFrameConsole = new JInternalFrame("Console");
@@ -34,12 +36,16 @@ public class ConsoleController {
 		JScrollPane scrollPane = new JScrollPane();
 		internalFrameConsole.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
-		listCommands = new JList();
-		scrollPane.setViewportView(listCommands);
+		testo = new JTextArea();
+		testo.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		testo.setEditable(false);
+		testo.setText("Benvenuto in GraphGUI\r\n");
+		scrollPane.setViewportView(testo);
+		
+		
 	}
+	
 
-	public JList getList() {
-		return listCommands;
-	}
+	
 	
 }
