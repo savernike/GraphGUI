@@ -1,12 +1,9 @@
 package it.unirc.sapafi.service;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JInternalFrame;
-import javax.swing.JSplitPane;
 
 public class FrameService {
 	private static List<JInternalFrame> listFrames = new LinkedList<JInternalFrame>();
