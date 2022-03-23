@@ -16,17 +16,20 @@ public class SplitPaneController {
 	public SplitPaneController(JPanel contentPane) {
 
 		splitPaneMain = new JSplitPane();
+		splitPaneMain.setName("mainPane");
 		splitPaneMain.setDividerSize(3);
 		splitPaneMain.setResizeWeight(0.8);
 		contentPane.add(splitPaneMain);
 
 		splitPaneLeft = new JSplitPane();
+		splitPaneLeft.setName("paneLeft");
 		splitPaneLeft.setDividerSize(3);
 		splitPaneLeft.setResizeWeight(0.65);
 		splitPaneLeft.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		splitPaneMain.setLeftComponent(splitPaneLeft);
 
 		splitPaneRight = new JSplitPane();
+		splitPaneRight.setName("paneRight");
 		splitPaneRight.setDividerSize(3);
 		splitPaneRight.setResizeWeight(0.5);
 		splitPaneRight.setOrientation(JSplitPane.VERTICAL_SPLIT);

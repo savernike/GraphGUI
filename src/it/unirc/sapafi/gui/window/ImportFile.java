@@ -1,5 +1,13 @@
 package it.unirc.sapafi.gui.window;
 
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Enumeration;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -13,7 +21,7 @@ public class ImportFile {
 		int returnValue = -1;
 		boolean correctExt = false;
 		do {
-			fileChooser = new JFileChooser();
+			fileChooser = new JFileChooser("C:\\Users\\Utente\\Pictures\\Screenshots");
 			fileChooser.setAcceptAllFileFilterUsed(false);
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("JAR Files", "jar");
 			fileChooser.setFileFilter(filter);
@@ -24,12 +32,15 @@ public class ImportFile {
 				String[] extension = { "jar" };
 				correctExt = checkExtensions(extension, nameFile);
 				// System.out.println(absolutePathFile);
-				
-				LoaderJAR(absolutePathFile);
-
 				if (!correctExt) {
 					JOptionPane.showMessageDialog(null, "L'unica estensione possibile è .jar", "Estensione non valida",
 							JOptionPane.ERROR_MESSAGE);
+				} else {
+					try {
+						loaderJAR(absolutePathFile);
+					} catch (ClassNotFoundException | IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		} while ((returnValue == JFileChooser.APPROVE_OPTION) && !correctExt);
@@ -48,9 +59,29 @@ public class ImportFile {
 		return res;
 	}
 
-	private void LoaderJAR(String path) {
-		ClassLoader.getSystemResource(path);
-		//TODO
+	private void loaderJAR(String path) throws IOException, ClassNotFoundException {
+		JarFile jarFile = new JarFile(path);
+		Enumeration<JarEntry> e = jarFile.entries();
+
+		URL[] urls = { new URL("jar:file:" + path + "!/") };
+		URLClassLoader cl = URLClassLoader.newInstance(urls);
+
+		while (e.hasMoreElements()) {
+			JarEntry je = e.nextElement();
+			if (je.isDirectory() || !je.getName().endsWith(".class")) {
+				continue;
+			}
+			// -6 because of .class
+			String className = je.getName().substring(0, je.getName().length() - 6);
+			className = className.replace('/', '.');
+			Class c = cl.loadClass(className);
+			System.out.println("NOME CLASSE: " + c.getCanonicalName());
+			Method[] methodList = c.getMethods();
+			int i = 0;
+			for(Method m : methodList) {
+				System.out.println(++i + ") "+ m.getName());
+			}
+		}
 	}
 
 }
