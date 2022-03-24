@@ -1,9 +1,6 @@
 package it.unirc.sapafi.gui.window;
 
-import java.beans.PropertyVetoException;
 import java.io.IOException;
-import java.lang.reflect.Parameter;
-import java.lang.reflect.TypeVariable;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
@@ -15,8 +12,6 @@ import java.util.jar.JarFile;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import it.unirc.sapafi.service.FrameService;
 
 public class ImportFile {
 
@@ -51,7 +46,7 @@ public class ImportFile {
 					}
 					
 					for(Class c : classLoaded) {
-						System.out.println(c.getName());
+						
 					}
 					
 //					FrameService frameService = new FrameService();
