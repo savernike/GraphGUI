@@ -1,7 +1,11 @@
 package it.unirc.sapafi.gui.window;
 
+import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+
+import it.unirc.sapafi.service.FrameService;
 
 public class SplitPaneController {
 
@@ -42,7 +46,6 @@ public class SplitPaneController {
 		consoleCtrl = new ConsoleController(splitPaneLeft);
 
 		implMethodCtrl = new ImplMethodController(splitPaneRight);
-
 	}
 
 	public DashboardController getDashboardCtrl() {

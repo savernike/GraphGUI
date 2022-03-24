@@ -1,10 +1,14 @@
 package it.unirc.sapafi.gui.window;
 
+import java.beans.PropertyVetoException;
 import java.io.IOException;
-import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.lang.reflect.TypeVariable;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -12,16 +16,20 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import it.unirc.sapafi.service.FrameService;
+
 public class ImportFile {
 
 	private JFileChooser fileChooser;
+	@SuppressWarnings("rawtypes")
+	private static List<Class> classLoaded = new LinkedList<Class>();
 
 	public ImportFile() {
 
 		int returnValue = -1;
 		boolean correctExt = false;
 		do {
-			fileChooser = new JFileChooser("C:\\Users\\Utente\\Pictures\\Screenshots");
+			fileChooser = new JFileChooser();
 			fileChooser.setAcceptAllFileFilterUsed(false);
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("JAR Files", "jar");
 			fileChooser.setFileFilter(filter);
@@ -41,6 +49,18 @@ public class ImportFile {
 					} catch (ClassNotFoundException | IOException e) {
 						e.printStackTrace();
 					}
+					
+					for(Class c : classLoaded) {
+						System.out.println(c.getName());
+					}
+					
+//					FrameService frameService = new FrameService();
+//					try {
+//						frameService.insertImplMethod(classLoaded);
+//					} catch (PropertyVetoException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
 				}
 			}
 		} while ((returnValue == JFileChooser.APPROVE_OPTION) && !correctExt);
@@ -59,6 +79,7 @@ public class ImportFile {
 		return res;
 	}
 
+	@SuppressWarnings("rawtypes")
 	private void loaderJAR(String path) throws IOException, ClassNotFoundException {
 		JarFile jarFile = new JarFile(path);
 		Enumeration<JarEntry> e = jarFile.entries();
@@ -75,13 +96,9 @@ public class ImportFile {
 			String className = je.getName().substring(0, je.getName().length() - 6);
 			className = className.replace('/', '.');
 			Class c = cl.loadClass(className);
-			System.out.println("NOME CLASSE: " + c.getCanonicalName());
-			Method[] methodList = c.getMethods();
-			int i = 0;
-			for(Method m : methodList) {
-				System.out.println(++i + ") "+ m.getName());
-			}
+			classLoaded.add(c);
 		}
+		jarFile.close();
 	}
 
 }
