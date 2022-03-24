@@ -1,5 +1,6 @@
 package it.unirc.sapafi.gui.window;
 
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -12,6 +13,8 @@ import java.util.jar.JarFile;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import it.unirc.sapafi.service.FrameService;
 
 public class ImportFile {
 
@@ -49,13 +52,13 @@ public class ImportFile {
 						
 					}
 					
-//					FrameService frameService = new FrameService();
-//					try {
-//						frameService.insertImplMethod(classLoaded);
-//					} catch (PropertyVetoException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
+					FrameService frameService = new FrameService();
+					try {
+						frameService.insertImplMethod(classLoaded);
+					} catch (PropertyVetoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		} while ((returnValue == JFileChooser.APPROVE_OPTION) && !correctExt);
