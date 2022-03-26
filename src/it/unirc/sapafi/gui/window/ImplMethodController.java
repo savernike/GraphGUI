@@ -1,11 +1,12 @@
 package it.unirc.sapafi.gui.window;
 
+import java.awt.BorderLayout;
+
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JSplitPane;
+
 import it.unirc.sapafi.service.FrameService;
-import javax.swing.ImageIcon;
-import java.awt.BorderLayout;
-import javax.swing.JScrollBar;
 
 public class ImplMethodController {
 
