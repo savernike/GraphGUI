@@ -46,7 +46,7 @@ public class FrameService {
 			{
 				for (Class c : classLoaded) {
 					for (Method m : c.getDeclaredMethods()) {
-						add(new DefaultMutableTreeNode(new Utils().printMethod(m, false)));
+						add(new DefaultMutableTreeNode(new Utils().printMethod(m, true)));
 					}
 				}
 
