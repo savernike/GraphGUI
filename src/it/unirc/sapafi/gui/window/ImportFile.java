@@ -39,7 +39,7 @@ public class ImportFile {
 				correctExt = checkExtensions(extension, nameFile);
 				// System.out.println(absolutePathFile);
 				if (!correctExt) {
-					JOptionPane.showMessageDialog(null, "L'unica estensione possibile è .jar", "Estensione non valida",
+					JOptionPane.showMessageDialog(null, "L'unica estensione possibile ï¿½ .jar", "Estensione non valida",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
 					try {
