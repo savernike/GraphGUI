@@ -45,6 +45,17 @@ public class ImportFile {
 						e.printStackTrace();
 					}
 					
+<<<<<<< HEAD
+					ClassSelector classSelector = new ClassSelector(classLoaded);
+					classSelector.setVisible(true);
+					
+					FrameService frameService = new FrameService();
+					try {
+						frameService.insertImplMethod(classLoaded);
+					} catch (PropertyVetoException e) {
+						e.printStackTrace();
+					}
+=======
 //					FrameService frameService = new FrameService();
 //					try {
 //						frameService.insertImplMethod(classLoaded);
@@ -52,6 +63,7 @@ public class ImportFile {
 //						// TODO Auto-generated catch block
 //						e.printStackTrace();
 //					}
+>>>>>>> master
 				}
 			}
 		} while ((returnValue == JFileChooser.APPROVE_OPTION) && !correctExt);
