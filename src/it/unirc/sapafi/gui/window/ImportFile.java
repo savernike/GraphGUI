@@ -48,15 +48,13 @@ public class ImportFile {
 						e.printStackTrace();
 					}
 					
-					for(Class c : classLoaded) {
-						
-					}
+					ClassSelector classSelector = new ClassSelector(classLoaded);
+					classSelector.setVisible(true);
 					
 					FrameService frameService = new FrameService();
 					try {
 						frameService.insertImplMethod(classLoaded);
 					} catch (PropertyVetoException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
