@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
@@ -47,7 +48,8 @@ public class MenuController {
 		mnNewMenuWindow = new JMenu("Window");
 		menuBar.add(mnNewMenuWindow);
 
-		mntmConsole = new JMenuItem("Console");
+		mntmConsole = new JCheckBoxMenuItem("Console");
+		mntmConsole.setSelected(true);
 		mntmConsole.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				minimizeConsole();
@@ -55,7 +57,8 @@ public class MenuController {
 		});
 		mnNewMenuWindow.add(mntmConsole);
 
-		mntmGraphPalette = new JMenuItem("Graph palette");
+		mntmGraphPalette = new JCheckBoxMenuItem("Graph palette");
+		mntmGraphPalette.setSelected(true);
 		mntmGraphPalette.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -63,7 +66,8 @@ public class MenuController {
 		});
 		mnNewMenuWindow.add(mntmGraphPalette);
 
-		mntmMethod = new JMenuItem("Method");
+		mntmMethod = new JCheckBoxMenuItem("Method");
+		mntmMethod.setSelected(true);
 		mntmMethod.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
