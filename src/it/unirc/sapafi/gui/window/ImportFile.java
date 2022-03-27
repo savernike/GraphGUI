@@ -4,6 +4,7 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,15 +16,16 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import it.unirc.sapafi.service.FrameService;
+import it.unirc.sapafi.utils.Utils;
 
 public class ImportFile {
 
 	private JFileChooser fileChooser;
 	@SuppressWarnings("rawtypes")
-	private static List<Class> classLoaded = new LinkedList<Class>();
+	private static List<Class> classesLoaded;
 
-	public ImportFile() {
-
+	public ImportFile() throws Exception {
+		
 		int returnValue = -1;
 		boolean correctExt = false;
 		do {
@@ -39,27 +41,52 @@ public class ImportFile {
 				correctExt = checkExtensions(extension, nameFile);
 				// System.out.println(absolutePathFile);
 				if (!correctExt) {
-					JOptionPane.showMessageDialog(null, "L'unica estensione possibile � .jar", "Estensione non valida",
+					JOptionPane.showMessageDialog(null, "L'unica estensione possibile \u00E8 .jar", "Estensione non valida",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
+					// Load class from JAR file
 					try {
 						loaderJAR(absolutePathFile);
 					} catch (ClassNotFoundException | IOException e) {
 						e.printStackTrace();
 					}
 					
-					ClassSelector classSelector = new ClassSelector(classLoaded);
-					classSelector.setVisible(true);
+					Class selectedClass = checkClassToSelect();
+					
 					
 					FrameService frameService = new FrameService();
 					try {
-						frameService.insertImplMethod(classLoaded);
+						frameService.insertImplMethod(classesLoaded);
 					} catch (PropertyVetoException e) {
 						e.printStackTrace();
 					}
 				}
 			}
 		} while ((returnValue == JFileChooser.APPROVE_OPTION) && !correctExt);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private Class checkClassToSelect() throws Exception {
+		List<Class> classFiltered = lookForClassesWithGraph(classesLoaded);
+		Class res = null;
+		if(classFiltered.size() == 0)
+			throw new Exception("No graph implemented in this JAR project");
+		else if (classFiltered.size() == 1)
+			return res;
+		ClassSelector classSelector = new ClassSelector(classFiltered);
+		classSelector.setVisible(true);
+		return res; //TODO
+	}
+
+	@SuppressWarnings("rawtypes")
+	private List<Class> lookForClassesWithGraph(List<Class> classLoaded) {
+		List<Class> res = new ArrayList<Class>();
+		for (Class c : classLoaded) {
+			String typeGraph = new Utils().lookForGraph(c);
+			if(!(typeGraph.equals("")))
+				res.add(c);
+		}
+		return res;
 	}
 
 	private boolean checkExtensions(String[] extension, String nameFile) {
@@ -75,7 +102,7 @@ public class ImportFile {
 		return res;
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "static-access" })
 	private void loaderJAR(String path) throws IOException, ClassNotFoundException {
 		JarFile jarFile = new JarFile(path);
 		Enumeration<JarEntry> e = jarFile.entries();
@@ -83,6 +110,7 @@ public class ImportFile {
 		URL[] urls = { new URL("jar:file:" + path + "!/") };
 		URLClassLoader cl = URLClassLoader.newInstance(urls);
 
+		this.classesLoaded = new LinkedList<Class>();
 		while (e.hasMoreElements()) {
 			JarEntry je = e.nextElement();
 			if (je.isDirectory() || !je.getName().endsWith(".class")) {
@@ -92,7 +120,7 @@ public class ImportFile {
 			String className = je.getName().substring(0, je.getName().length() - 6);
 			className = className.replace('/', '.');
 			Class c = cl.loadClass(className);
-			classLoaded.add(c);
+			classesLoaded.add(c);
 		}
 		jarFile.close();
 	}

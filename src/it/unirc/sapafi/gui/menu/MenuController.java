@@ -35,14 +35,18 @@ public class MenuController {
 
 		mnImport = new JMenu("Import");
 		mnImport.addMouseListener(new MouseAdapter() {
-			
-				
 
 			public void mousePressed(MouseEvent e) {
-				ImportFile jfc = new ImportFile();
+				try {
+					@SuppressWarnings("unused")
+					ImportFile jfc = new ImportFile();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
-		
+
 		menuBar.add(mnImport);
 
 		mnNewMenuWindow = new JMenu("Window");
@@ -79,7 +83,7 @@ public class MenuController {
 
 		mnPreferences = new JMenu("Preferences");
 		menuBar.add(mnPreferences);
-		
+
 		mntmLayout = new JMenuItem("Layout");
 		mntmLayout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,12 +95,10 @@ public class MenuController {
 		mnNewMenuInfo = new JMenu("Info");
 		menuBar.add(mnNewMenuInfo);
 	}
-	
-	
-	protected void setWindowsLayout() {
-		
-	}
 
+	protected void setWindowsLayout() {
+
+	}
 
 	private void minimizeConsole() {
 		FrameService frameService = new FrameService();

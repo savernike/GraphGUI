@@ -6,6 +6,7 @@ import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -17,6 +18,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
 
 public class ClassSelector extends JDialog {
 
@@ -25,7 +29,7 @@ public class ClassSelector extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ClassSelector(List<Class> classFiltered) {
 		setTitle("Select a class");
 		setModal(true);
@@ -38,17 +42,21 @@ public class ClassSelector extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			JLabel lblNewLabel = new JLabel("Select one of these /N/ classes");
+			JLabel lblNewLabel = new JLabel("Select one of these " + classFiltered.size() + " classes");
 			lblNewLabel.setBounds(10, 11, 414, 24);
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
 			contentPanel.add(lblNewLabel);
 		}
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(86, 103, 262, 22);
-		contentPanel.add(comboBox);
+
+		JComboBox comboBoxClasses = new JComboBox();
+		List<String> classNames = new ArrayList<String>();
+		classFiltered.forEach((classItem) -> classNames.add(classItem.getName()));
+		comboBoxClasses.setModel(new DefaultComboBoxModel(classNames.toArray()));
+		comboBoxClasses.setBounds(10, 103, 414, 22);
+		contentPanel.add(comboBoxClasses);
 		setLocationRelativeTo(null);
+
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new MatteBorder(3, 0, 0, 0, (Color) UIManager.getColor("Button.light")));
@@ -63,6 +71,11 @@ public class ClassSelector extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

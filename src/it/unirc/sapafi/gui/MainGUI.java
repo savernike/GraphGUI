@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -22,7 +21,6 @@ public class MainGUI extends JFrame {
 	private static final long serialVersionUID = 6304487844265567838L;
 	
 	private JPanel contentPane;
-	private JMenuBar menuBar;
 	public SplitPaneController splitPaneCtrl;
 	public MenuController menuCtrl;
 
@@ -54,6 +52,7 @@ public class MainGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("static-access")
 	public MainGUI() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainGUI.class.getResource("/it/unirc/sapafi/img/main_icon.jpg")));
 		setTitle("GraphGUI");

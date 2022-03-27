@@ -1,16 +1,23 @@
 package it.unirc.sapafi.utils;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unirc.sapafi.enumerative.GraphType;
+
 public class Utils {
+	
+	public Utils() {
+	}
 
 	public String printMethod(Method method, boolean showPackage) {
 		String visibility = Modifier.toString(method.getModifiers());
-		String returnType = method.getGenericReturnType().getTypeName();
+		String returnType = showPackage ? method.getGenericReturnType().getTypeName()
+				: removePackage(method.getGenericReturnType().getTypeName());
 		String methodName = method.getName();
 		Type[] params = method.getGenericParameterTypes();
 		String parsedParams = "(" + parseParams(params, showPackage) + ")";
@@ -37,21 +44,21 @@ public class Utils {
 
 	private String removePackage(String typeName) {
 		String res = "";
-		if(!(typeName.contains("<") || typeName.contains(">"))) {
+		if (!(typeName.contains("<") || typeName.contains(">"))) {
 			res = removePackageName(typeName);
 			return res;
 		}
-		//Divide all generics and insert all in a list reparsered
+		// Divide all generics and insert all in a list reparsered
 		List<String> list = divideGenerics(typeName);
 		// Merge all the generics in list into a string
 		res = mergeGenerics(list);
-		
+
 		return res;
 	}
 
 	private String mergeGenerics(List<String> list) {
 		StringBuilder res = new StringBuilder(list.get(0));
-		for(int i = 1; i<list.size(); i++) {
+		for (int i = 1; i < list.size(); i++) {
 			int genericsClose = res.indexOf(">");
 			res.insert(genericsClose == -1 ? res.length() : genericsClose, list.get(i));
 		}
@@ -67,7 +74,8 @@ public class Utils {
 			genericsOpenIndex = className.lastIndexOf("<");
 			genericsCloseIndex = className.indexOf(">");
 			boolean hasGeneric = genericsOpenIndex != -1 && genericsCloseIndex != -1;
-			String getGenericString = hasGeneric ? className.substring(genericsOpenIndex, genericsCloseIndex + 1) : className;
+			String getGenericString = hasGeneric ? className.substring(genericsOpenIndex, genericsCloseIndex + 1)
+					: className;
 			className = className.replace(getGenericString, "");
 			list.add(0, hasGeneric ? getGenericString.substring(1, getGenericString.length() - 1) : getGenericString);
 		}
@@ -77,7 +85,7 @@ public class Utils {
 			String newItem = i == 0 ? removePackageName(item) : "<" + removePackageName(item) + ">";
 			list.set(i, newItem);
 		}
-		
+
 		return list;
 	}
 
@@ -96,6 +104,72 @@ public class Utils {
 			res += word + " ";
 		}
 		return res.trim();
+	}
+
+	public String graphTypeToString(GraphType g) {
+		String res = "";
+		switch (g) {
+		case DENSEGRAPH:
+			res = "DenseGraph";
+			break;
+		case DIRECTEDDENSEGRAPH:
+			res = "DirectedDenseGraph";
+			break;
+		case DIRECTEDSPARSEGRAPH:
+			res = "DirectedSparseGraph";
+			break;
+		case DIRECTEDWEIGHTEDDENSEGRAPH:
+			res = "DirectedWeightedDenseGraph";
+			break;
+		case DIRECTEDWEIGHTEDSPARSEGRAPH:
+			res = "DirectedWeightedSparseGraph";
+			break;
+		case SPARSEGRAPH:
+			res = "SparseGraph";
+			break;
+		case WEIGHTEDDENSEGRAPH:
+			res = "WeightedDenseGraph";
+			break;
+		case WEIGHTEDSPARSEGRAPH:
+			res = "WeightedSparseGraph";
+			break;
+		}
+		return res;
+
+	}
+
+	@SuppressWarnings("rawtypes")
+	public String lookForGraph(Class externalClass) {
+		Field[] fields = externalClass.getDeclaredFields();
+		String res = "";
+		if (fields.length == 0)
+			return res;
+		for (Field field : fields) {
+			if (isGraph(field)) {
+				res = field.getGenericType().getTypeName();
+				return res;
+			}
+		}
+		return res;
+	}
+
+	private boolean isGraph(Field field) {
+		String nameType = field.getType().getSimpleName();
+		boolean res = checkIfGraph(nameType, GraphType.DENSEGRAPH)
+				|| checkIfGraph(nameType, GraphType.DIRECTEDDENSEGRAPH)
+				|| checkIfGraph(nameType, GraphType.DIRECTEDSPARSEGRAPH)
+				|| checkIfGraph(nameType, GraphType.DIRECTEDWEIGHTEDDENSEGRAPH)
+				|| checkIfGraph(nameType, GraphType.DIRECTEDWEIGHTEDSPARSEGRAPH)
+				|| checkIfGraph(nameType, GraphType.SPARSEGRAPH)
+				|| checkIfGraph(nameType, GraphType.WEIGHTEDDENSEGRAPH)
+				|| checkIfGraph(nameType, GraphType.WEIGHTEDSPARSEGRAPH);
+		return res;
+		
+
+	}
+
+	public boolean checkIfGraph(String trialName, GraphType g) {
+		return trialName.equalsIgnoreCase(graphTypeToString(g));
 	}
 
 }
