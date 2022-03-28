@@ -1,21 +1,16 @@
 package it.unirc.sapafi.gui.window;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
 
 import it.unirc.sapafi.service.FrameService;
-import javax.swing.JTextPane;
-import javax.swing.DropMode;
-import java.awt.Cursor;
-import javax.swing.ImageIcon;
-import javax.swing.AbstractListModel;
-import javax.swing.JTextArea;
-import java.awt.Font;
 
 public class ConsoleController {
 

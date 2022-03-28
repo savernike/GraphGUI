@@ -37,17 +37,15 @@ public class FrameService {
 	}
 
 	@SuppressWarnings({ "rawtypes", "serial" })
-	public void insertImplMethod(List<Class> classLoaded) throws PropertyVetoException {
+	public void insertImplMethod(Class classLoaded) throws PropertyVetoException {
 		JInternalFrame frame = getFrameInList("Graph Implemented Method");
 		frame.setSelected(true);
 		JTree tree = new JTree();
 
 		tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Implemented Methods") {
 			{
-				for (Class c : classLoaded) {
-					for (Method m : c.getDeclaredMethods()) {
-						add(new DefaultMutableTreeNode(new Utils().printMethod(m, false)));
-					}
+				for (Method m : classLoaded.getDeclaredMethods()) {
+					add(new DefaultMutableTreeNode(new Utils().printMethod(m, false)));
 				}
 
 			}

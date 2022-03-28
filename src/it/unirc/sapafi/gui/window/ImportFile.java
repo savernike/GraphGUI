@@ -4,10 +4,11 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -24,6 +25,7 @@ public class ImportFile {
 	@SuppressWarnings("rawtypes")
 	private static List<Class> classesLoaded;
 
+	@SuppressWarnings("rawtypes")
 	public ImportFile() throws Exception {
 		
 		int returnValue = -1;
@@ -56,7 +58,7 @@ public class ImportFile {
 					
 					FrameService frameService = new FrameService();
 					try {
-						frameService.insertImplMethod(classesLoaded);
+						frameService.insertImplMethod(selectedClass);
 					} catch (PropertyVetoException e) {
 						e.printStackTrace();
 					}
@@ -67,24 +69,28 @@ public class ImportFile {
 
 	@SuppressWarnings("rawtypes")
 	private Class checkClassToSelect() throws Exception {
-		List<Class> classFiltered = lookForClassesWithGraph(classesLoaded);
+		Map<Class, String> chosenClass = lookForClassesWithGraph();
 		Class res = null;
-		if(classFiltered.size() == 0)
+		if(chosenClass.size() == 0)
 			throw new Exception("No graph implemented in this JAR project");
-		else if (classFiltered.size() == 1)
+		else if (chosenClass.size() == 1)
 			return res;
-		ClassSelector classSelector = new ClassSelector(classFiltered);
-		classSelector.setVisible(true);
-		return res; //TODO
+		else {
+			ClassSelector classSelector = new ClassSelector(chosenClass);
+			classSelector.setVisible(true);
+			res = (Class) chosenClass.keySet().toArray()[ClassSelector.indexSelectedClass];
+			return res;
+		}
 	}
 
-	@SuppressWarnings("rawtypes")
-	private List<Class> lookForClassesWithGraph(List<Class> classLoaded) {
-		List<Class> res = new ArrayList<Class>();
-		for (Class c : classLoaded) {
-			String typeGraph = new Utils().lookForGraph(c);
+	@SuppressWarnings({ "rawtypes", "static-access" })
+	private Map<Class, String> lookForClassesWithGraph() {
+		Map<Class, String> res = new HashMap<Class, String>();
+		for (Class c : this.classesLoaded) {
+			Utils utils = new Utils();
+			String typeGraph = utils.removePackage(utils.lookForGraph(c));
 			if(!(typeGraph.equals("")))
-				res.add(c);
+				res.put(c, typeGraph);
 		}
 		return res;
 	}

@@ -14,6 +14,7 @@ public class Utils {
 	public Utils() {
 	}
 
+	
 	public String printMethod(Method method, boolean showPackage) {
 		String visibility = Modifier.toString(method.getModifiers());
 		String returnType = showPackage ? method.getGenericReturnType().getTypeName()
@@ -42,7 +43,7 @@ public class Utils {
 		return res;
 	}
 
-	private String removePackage(String typeName) {
+	public String removePackage(String typeName) {
 		String res = "";
 		if (!(typeName.contains("<") || typeName.contains(">"))) {
 			res = removePackageName(typeName);
@@ -82,7 +83,7 @@ public class Utils {
 		// Parse all the generics, removing the package name
 		for (int i = 0; i < list.size(); i++) {
 			String item = list.get(i);
-			String newItem = i == 0 ? removePackageName(item) : "<" + removePackageName(item) + ">";
+			String newItem = (i == 0 ? removePackageName(item) : "<" + removePackageName(item) + ">");
 			list.set(i, newItem);
 		}
 
