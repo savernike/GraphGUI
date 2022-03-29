@@ -5,9 +5,9 @@ import javax.swing.JSplitPane;
 
 public class SplitPaneController {
 
-	private JSplitPane splitPaneMain;
-	private JSplitPane splitPaneLeft;
-	private JSplitPane splitPaneRight;
+	private static JSplitPane splitPaneMain;
+	private static JSplitPane splitPaneLeft;
+	private static JSplitPane splitPaneRight;
 	private DashboardController dashboardCtrl;
 	private PaletteController paletteCtrl;
 	private ConsoleController consoleCtrl;
@@ -42,6 +42,18 @@ public class SplitPaneController {
 		consoleCtrl = new ConsoleController(splitPaneLeft);
 
 		implMethodCtrl = new ImplMethodController(splitPaneRight);
+	}
+
+	public static JSplitPane getSplitPaneMain() {
+		return splitPaneMain;
+	}
+
+	public static JSplitPane getSplitPaneLeft() {
+		return splitPaneLeft;
+	}
+
+	public static JSplitPane getSplitPaneRight() {
+		return splitPaneRight;
 	}
 
 	public DashboardController getDashboardCtrl() {

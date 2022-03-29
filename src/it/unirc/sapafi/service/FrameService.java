@@ -39,6 +39,8 @@ public class FrameService {
 	@SuppressWarnings({ "rawtypes", "serial" })
 	public void insertImplMethod(Class classLoaded) throws PropertyVetoException {
 		JInternalFrame frame = getFrameInList("Graph Implemented Method");
+		frame.getContentPane().removeAll();
+		frame.getContentPane().revalidate();
 		frame.setSelected(true);
 		JTree tree = new JTree();
 
