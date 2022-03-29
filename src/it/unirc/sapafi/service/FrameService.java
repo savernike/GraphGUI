@@ -46,12 +46,15 @@ public class FrameService {
 
 		tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Implemented Methods") {
 			{
+				DefaultMutableTreeNode method = new DefaultMutableTreeNode(
+						"Method from " + classLoaded.getName());
 				for (Method m : classLoaded.getDeclaredMethods()) {
-					add(new DefaultMutableTreeNode(new Utils().printMethod(m, false)));
+					method.add(new DefaultMutableTreeNode(new Utils().printMethod(m, false)));
 				}
-
+				add(method);
 			}
 		}));
+		tree.expandRow(1);
 		frame.getContentPane().add(new JScrollPane(tree), BorderLayout.CENTER);
 	}
 
