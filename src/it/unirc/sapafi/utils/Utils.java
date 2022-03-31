@@ -1,5 +1,6 @@
 package it.unirc.sapafi.utils;
 
+import java.awt.Component;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -7,7 +8,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JInternalFrame;
+import javax.swing.JSplitPane;
+
 import it.unirc.sapafi.enumerative.GraphType;
+import it.unirc.sapafi.service.FrameService;
 
 public class Utils {
 	
@@ -172,5 +177,20 @@ public class Utils {
 	public boolean checkIfGraph(String trialName, GraphType g) {
 		return trialName.equalsIgnoreCase(graphTypeToString(g));
 	}
+	
+	public boolean toogleInternalFrame(String frameTitle, JSplitPane parentSplitPane, boolean isRightOrBelow) {
+		JInternalFrame chosenFrame = FrameService.getFrameInList(frameTitle);
+		chosenFrame.setVisible(!chosenFrame.isVisible());
+		if(isRightOrBelow)
+			parentSplitPane.setRightComponent(chosenFrame);
+		else
+			parentSplitPane.setLeftComponent(chosenFrame);
+		parentSplitPane.revalidate();
+		return chosenFrame.isVisible();
+	}
+	
+//	public void switchSelectMenuItem(Component menuItem) {
+//		menuItem
+//	}
 
 }

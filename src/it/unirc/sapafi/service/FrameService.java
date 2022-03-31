@@ -19,11 +19,11 @@ import it.unirc.sapafi.utils.Utils;
 public class FrameService {
 	private static List<JInternalFrame> listFrames = new LinkedList<JInternalFrame>();
 
-	public List<JInternalFrame> getListFrames() {
+	public static List<JInternalFrame> getListFrames() {
 		return listFrames;
 	}
 
-	public int getFramePosInList(String title) {
+	public static int getFramePosInList(String title) {
 		int res = -1;
 		for (int i = 0; i < listFrames.size(); i++) {
 			if (title.equals(listFrames.get(i).getTitle())) {
@@ -34,7 +34,7 @@ public class FrameService {
 		return res;
 	}
 
-	public JInternalFrame getFrameInList(String title) {
+	public static JInternalFrame getFrameInList(String title) {
 		return listFrames.get(getFramePosInList(title));
 	}
 

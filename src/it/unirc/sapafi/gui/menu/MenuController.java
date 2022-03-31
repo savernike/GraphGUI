@@ -1,5 +1,6 @@
 package it.unirc.sapafi.gui.menu;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -13,20 +14,24 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import it.unirc.sapafi.gui.window.ImportFile;
+import it.unirc.sapafi.gui.window.SplitPaneController;
 import it.unirc.sapafi.service.FrameService;
+import it.unirc.sapafi.utils.Utils;
 
 public class MenuController {
 	private JMenu mnImport;
-	private JMenu mnNewMenuWindow;
-	private JMenuItem mntmConsole;
-	private JMenuItem mntmGraphPalette;
-	private JMenuItem mntmMethod;
+	private JMenu mnWindows;
+	private static JMenuItem mntmConsole;
+	private static JMenuItem mntmGraphPalette;
+	private static JMenuItem mntmMethod;
 	private JMenu mnHelp;
 	private JMenu mnPreferences;
 	private JMenu mnNewMenuInfo;
 	private JMenuBar menuBar;
 	private JMenuItem mntmLayout;
 	private JFrame frame;
+	
+	public MenuController() {}
 
 	public MenuController(JFrame frame) {
 		this.frame = frame;
@@ -49,34 +54,38 @@ public class MenuController {
 
 		menuBar.add(mnImport);
 
-		mnNewMenuWindow = new JMenu("Window");
-		menuBar.add(mnNewMenuWindow);
+		mnWindows = new JMenu("Window");
+		menuBar.add(mnWindows);
 
 		mntmConsole = new JCheckBoxMenuItem("Console");
+		mntmConsole.setName(mntmConsole.getText());
 		mntmConsole.setSelected(true);
 		mntmConsole.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				minimizeConsole();
+				toogleConsoleFrame();
 			}
 		});
-		mnNewMenuWindow.add(mntmConsole);
+		mnWindows.add(mntmConsole);
 
 		mntmGraphPalette = new JCheckBoxMenuItem("Graph palette");
+		mntmGraphPalette.setName(mntmGraphPalette.getText());
 		mntmGraphPalette.setSelected(true);
 		mntmGraphPalette.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tooglePaletteFrame();
 			}
 
 		});
-		mnNewMenuWindow.add(mntmGraphPalette);
+		mnWindows.add(mntmGraphPalette);
 
 		mntmMethod = new JCheckBoxMenuItem("Method");
+		mntmMethod.setName(mntmMethod.getText());
 		mntmMethod.setSelected(true);
 		mntmMethod.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		mnNewMenuWindow.add(mntmMethod);
+		mnWindows.add(mntmMethod);
 
 		mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
@@ -87,7 +96,6 @@ public class MenuController {
 		mntmLayout = new JMenuItem("Layout");
 		mntmLayout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setWindowsLayout();
 			}
 		});
 		mnPreferences.add(mntmLayout);
@@ -96,13 +104,29 @@ public class MenuController {
 		menuBar.add(mnNewMenuInfo);
 	}
 
-	protected void setWindowsLayout() {
-
+	private void tooglePaletteFrame() {
+		Utils utils = new Utils();
+		utils.toogleInternalFrame("Graph Palette", SplitPaneController.getSplitPaneRight(), false);
 	}
 
-	private void minimizeConsole() {
-		FrameService frameService = new FrameService();
-		JInternalFrame console = frameService.getListFrames().get(frameService.getFramePosInList("Console"));
-		// TODO
+	private void toogleConsoleFrame() {
+		Utils utils = new Utils();
+		utils.toogleInternalFrame("Console", SplitPaneController.getSplitPaneLeft(), true);
+	}
+	
+	public static void toogleMenuItem(int menuItem, boolean state) {
+		switch(menuItem) {
+		case 0:
+			mntmConsole.setSelected(state);
+			break;
+		case 1:
+			mntmGraphPalette.setSelected(state);
+			break;
+		case 2:
+			mntmMethod.setSelected(state);
+			break;
+		default:
+			throw new IndexOutOfBoundsException("You have to insert a number between 0 and 2");
+		}
 	}
 }
