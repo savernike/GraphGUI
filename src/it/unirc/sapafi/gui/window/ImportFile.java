@@ -6,6 +6,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -22,12 +23,13 @@ import it.unirc.sapafi.utils.Utils;
 public class ImportFile {
 
 	private JFileChooser fileChooser;
+	private Map<Class, String> chosenClasses;
 	@SuppressWarnings("rawtypes")
 	private static List<Class> classesLoaded;
 
 	@SuppressWarnings("rawtypes")
-	public ImportFile() throws Exception {
-		
+	public ImportFile() {
+
 		int returnValue = -1;
 		boolean correctExt = false;
 		do {
@@ -43,8 +45,8 @@ public class ImportFile {
 				correctExt = checkExtensions(extension, nameFile);
 				// System.out.println(absolutePathFile);
 				if (!correctExt) {
-					JOptionPane.showMessageDialog(null, "L'unica estensione possibile \u00E8 .jar", "Estensione non valida",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "L'unica estensione possibile \u00E8 .jar",
+							"Estensione non valida", JOptionPane.ERROR_MESSAGE);
 				} else {
 					// Load class from JAR file
 					try {
@@ -52,33 +54,59 @@ public class ImportFile {
 					} catch (ClassNotFoundException | IOException e) {
 						e.printStackTrace();
 					}
-					
-					Class selectedClass = checkClassToSelect();
-					
-					
+
+					Class selectedClass = null;
+					try {
+						selectedClass = checkClassToSelect();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						System.out.println(e1.getMessage());
+					}
+
 					FrameService frameService = new FrameService();
 					try {
 						frameService.insertImplMethod(selectedClass);
 					} catch (PropertyVetoException e) {
 						e.printStackTrace();
 					}
+
+					try {
+						frameService.insertBeans(filterClassesWithoutGraph(), PaletteController.getTree());
+					} catch (PropertyVetoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}
 			}
 		} while ((returnValue == JFileChooser.APPROVE_OPTION) && !correctExt);
 	}
 
 	@SuppressWarnings("rawtypes")
+	private List<Class> filterClassesWithoutGraph() { // stiamo togliendo le classi con il grafo da tutte quelle che si
+														// caricano
+		List<Class> classesWithoutGraph = classesLoaded;
+		for (Class c : chosenClasses.keySet()) {
+
+			classesWithoutGraph.remove(c);
+
+		}
+		return classesWithoutGraph;
+	}
+
+	@SuppressWarnings("rawtypes")
 	private Class checkClassToSelect() throws Exception {
-		Map<Class, String> chosenClass = lookForClassesWithGraph();
+
+		chosenClasses = lookForClassesWithGraph();
 		Class res = null;
-		if(chosenClass.size() == 0)
+		if (chosenClasses.size() == 0)
 			throw new Exception("No graph implemented in this JAR project");
-		else if (chosenClass.size() == 1)
+		else if (chosenClasses.size() == 1)
 			return res;
 		else {
-			ClassSelector classSelector = new ClassSelector(chosenClass);
+			ClassSelector classSelector = new ClassSelector(chosenClasses);
 			classSelector.setVisible(true);
-			res = (Class) chosenClass.keySet().toArray()[ClassSelector.indexSelectedClass];
+			res = (Class) chosenClasses.keySet().toArray()[ClassSelector.indexSelectedClass];
 			return res;
 		}
 	}
@@ -89,7 +117,7 @@ public class ImportFile {
 		for (Class c : this.classesLoaded) {
 			Utils utils = new Utils();
 			String typeGraph = utils.removePackage(utils.lookForGraph(c));
-			if(!(typeGraph.equals("")))
+			if (!(typeGraph.equals("")))
 				res.put(c, typeGraph);
 		}
 		return res;
