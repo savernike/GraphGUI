@@ -6,13 +6,14 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
-import it.unirc.sapafi.gui.window.PaletteController;
 import it.unirc.sapafi.utils.Utils;
 
 public class FrameService {
@@ -42,7 +43,6 @@ public class FrameService {
 		JInternalFrame frame = getFrameInList("Graph Implemented Method");
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
-		frame.setSelected(true);
 
 		if (classLoaded == null) {
 			return;
@@ -63,32 +63,24 @@ public class FrameService {
 		frame.getContentPane().add(new JScrollPane(tree), BorderLayout.CENTER);
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "serial" })
 	public void insertBeans(List<Class> classesLoaded, JTree paletteTree) throws PropertyVetoException {
 		JInternalFrame frame = getFrameInList("Graph Palette");
 		paletteTree.removeAll();
-		paletteTree.revalidate();
-		frame.setSelected(true);
-		paletteTree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Una minchia") {
+		paletteTree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Root") {
 			{
 				for (Class c1 : classesLoaded) {
-					DefaultMutableTreeNode method = new DefaultMutableTreeNode(c1.getName());
-
-					add(method);
+					DefaultMutableTreeNode bean = new DefaultMutableTreeNode(c1.getName());
+					{
+						DefaultMutableTreeNode instance = new DefaultMutableTreeNode("Insert a new instance");
+						bean.add(instance);
+					}
+					add(bean);
 				}
 			}
 		}));
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
+		paletteTree.setVisible(true);
+		frame.revalidate();
 	}
 
 }

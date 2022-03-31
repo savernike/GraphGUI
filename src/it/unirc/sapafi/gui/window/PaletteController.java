@@ -16,7 +16,8 @@ public class PaletteController {
 
 	private JInternalFrame internalFrameGraphPalette;
 	private static JScrollPane scrollPane;
-	public JScrollPane getScrollPane() {
+	
+	public static JScrollPane getScrollPane() {
 		return scrollPane;
 	}
 
@@ -30,7 +31,7 @@ public class PaletteController {
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public PaletteController(JSplitPane splitPane) {
+	public PaletteController(JSplitPane splitPane) {	
 		internalFrameGraphPalette = new JInternalFrame("Graph Palette");
 		internalFrameGraphPalette.setFrameIcon(new ImageIcon(PaletteController.class.getResource("/it/unirc/sapafi/img/palette_icon.png")));
 		internalFrameGraphPalette.setClosable(true);
@@ -48,9 +49,5 @@ public class PaletteController {
 		tree.setVisible(false);
 		tree.setRootVisible(false);
 		scrollPane.setViewportView(tree);
-	}
-
-	public PaletteController(JSplitPane splitPaneRight, List<Class> classLoaded) {
-		// TODO Auto-generated constructor stub
 	}
 }
