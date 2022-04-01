@@ -83,6 +83,7 @@ public class MenuController {
 		mntmMethod.setSelected(true);
 		mntmMethod.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				toogleImplMethodsFrame();
 			}
 		});
 		mnWindows.add(mntmMethod);
@@ -102,6 +103,11 @@ public class MenuController {
 
 		mnNewMenuInfo = new JMenu("Info");
 		menuBar.add(mnNewMenuInfo);
+	}
+
+	protected void toogleImplMethodsFrame() {
+		Utils utils = new Utils();
+		utils.toogleInternalFrame("Graph Implemented Method", SplitPaneController.getSplitPaneRight(), true);
 	}
 
 	private void tooglePaletteFrame() {
