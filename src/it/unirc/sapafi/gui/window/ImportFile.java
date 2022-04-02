@@ -6,7 +6,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +58,6 @@ public class ImportFile {
 					try {
 						selectedClass = checkClassToSelect();
 					} catch (Exception e1) {
-						System.out.println("Ciao");
 						System.out.println(e1.getMessage());
 						break;
 					}
@@ -108,6 +106,9 @@ public class ImportFile {
 		} else {
 			ClassSelector classSelector = new ClassSelector(chosenClasses);
 			classSelector.setVisible(true);
+			if(ClassSelector.indexSelectedClass == null) {
+				throw new Exception("You have to choose at least one class with a graph to use the program");
+			}
 			res = (Class) chosenClasses.keySet().toArray()[ClassSelector.indexSelectedClass];
 			return res;
 		}

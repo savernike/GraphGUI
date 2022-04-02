@@ -107,7 +107,7 @@ public class ClassSelector extends JDialog {
 	private void chooseOnExit(boolean selected) {
 		if(!selected) {
 			int reply = JOptionPane.showConfirmDialog(null, "Are you sure you wanna abort the choice?", "Abort JAR Import", JOptionPane.YES_NO_OPTION);
-			if(reply == JOptionPane.NO_OPTION)
+			if(reply == JOptionPane.NO_OPTION || reply == JOptionPane.CLOSED_OPTION)
 				return;
 		}
 		indexSelectedClass = selected ? comboBoxClasses.getSelectedIndex() : null;

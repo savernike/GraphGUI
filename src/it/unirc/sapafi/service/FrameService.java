@@ -6,12 +6,10 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
 import it.unirc.sapafi.utils.Utils;
