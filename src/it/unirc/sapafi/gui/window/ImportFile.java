@@ -96,14 +96,15 @@ public class ImportFile {
 
 	@SuppressWarnings("rawtypes")
 	private Class checkClassToSelect() throws Exception {
-
-		chosenClasses = lookForClassesWithGraph();
 		Class res = null;
+		chosenClasses = lookForClassesWithGraph();
+
 		if (chosenClasses.size() == 0)
 			throw new Exception("No graph implemented in this JAR project");
-		else if (chosenClasses.size() == 1)
+		else if (chosenClasses.size() == 1) {
+			res = (Class) chosenClasses.keySet().toArray()[0];
 			return res;
-		else {
+		} else {
 			ClassSelector classSelector = new ClassSelector(chosenClasses);
 			classSelector.setVisible(true);
 			res = (Class) chosenClasses.keySet().toArray()[ClassSelector.indexSelectedClass];
