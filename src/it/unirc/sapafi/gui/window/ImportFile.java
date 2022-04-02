@@ -59,8 +59,8 @@ public class ImportFile {
 					try {
 						selectedClass = checkClassToSelect();
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
 						System.out.println(e1.getMessage());
+						break;
 					}
 
 					FrameService frameService = new FrameService();
