@@ -1,24 +1,29 @@
 package it.unirc.sapafi.gui.window;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTree;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 import it.unirc.sapafi.gui.menu.MenuController;
 import it.unirc.sapafi.service.FrameService;
-import javax.swing.JFrame;
-import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameEvent;
 
 public class ImplMethodController {
 
 	private JInternalFrame internalFrameMethod;
+	private static JTree tree;
 
 	/**
 	 * @wbp.parser.constructor
 	 */
+	@SuppressWarnings("serial")
 	public ImplMethodController(JSplitPane splitPane) {
 		internalFrameMethod = new JInternalFrame("Graph Implemented Method");
 		internalFrameMethod.addInternalFrameListener(new InternalFrameAdapter() {
@@ -35,10 +40,21 @@ public class ImplMethodController {
 		internalFrameMethod.setVisible(true);
 		splitPane.setRightComponent(internalFrameMethod);
 
-		FrameService frameService = new FrameService();
-		frameService.getListFrames().add(internalFrameMethod);
+		FrameService.getListFrames().add(internalFrameMethod);
 		internalFrameMethod.getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		internalFrameMethod.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		
+		tree = new JTree();
+		tree.setVisible(false);
+		tree.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		scrollPane.setViewportView(tree);
 
+	}
+
+	public static JTree getTree() {
+		return tree;
 	}
 
 }

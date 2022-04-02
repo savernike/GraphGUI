@@ -52,7 +52,6 @@ public class MainGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings("static-access")
 	public MainGUI() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainGUI.class.getResource("/it/unirc/sapafi/img/main_icon.jpg")));
 		setTitle("GraphGUI");
@@ -60,7 +59,7 @@ public class MainGUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 864, 425);
 		setLocationRelativeTo(null);
-		setExtendedState(this.MAXIMIZED_BOTH);
+		setExtendedState(MainGUI.MAXIMIZED_BOTH);
 
 		menuCtrl = new MenuController(this);
 

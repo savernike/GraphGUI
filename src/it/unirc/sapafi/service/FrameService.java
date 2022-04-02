@@ -1,6 +1,5 @@
 package it.unirc.sapafi.service;
 
-import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.beans.PropertyVetoException;
 import java.lang.reflect.Method;
@@ -8,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JInternalFrame;
-import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -38,18 +36,14 @@ public class FrameService {
 	}
 
 	@SuppressWarnings({ "rawtypes", "serial" })
-	public void insertImplMethod(Class classLoaded) throws PropertyVetoException {
+	public void insertImplMethod(Class classLoaded, JTree implMethodTree) throws PropertyVetoException {
 		JInternalFrame frame = getFrameInList("Graph Implemented Method");
-		frame.getContentPane().removeAll();
-		frame.getContentPane().revalidate();
 
 		if (classLoaded == null) {
 			return;
 		}
-
-		JTree tree = new JTree();
-
-		tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Implemented Methods") {
+		implMethodTree.removeAll();
+		implMethodTree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Implemented Methods") {
 			{
 				DefaultMutableTreeNode method = new DefaultMutableTreeNode("Method from " + classLoaded.getName());
 				for (Method m : classLoaded.getDeclaredMethods()) {
@@ -58,9 +52,8 @@ public class FrameService {
 				add(method);
 			}
 		}));
-		tree.expandRow(1);
-		tree.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		frame.getContentPane().add(new JScrollPane(tree), BorderLayout.CENTER);
+		implMethodTree.setVisible(true);
+		frame.revalidate();
 	}
 
 	@SuppressWarnings({ "rawtypes", "serial" })
@@ -69,14 +62,18 @@ public class FrameService {
 		paletteTree.removeAll();
 		paletteTree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Root") {
 			{
-				for (Class c1 : classesLoaded) {
-					DefaultMutableTreeNode bean = new DefaultMutableTreeNode(c1.getName());
-					{
-						DefaultMutableTreeNode instance = new DefaultMutableTreeNode("Insert a new instance");
-						bean.add(instance);
+				DefaultMutableTreeNode beans = new DefaultMutableTreeNode("Beans");
+				{
+					for (Class c1 : classesLoaded) {
+						DefaultMutableTreeNode bean = new DefaultMutableTreeNode(c1.getName());
+						{
+							DefaultMutableTreeNode instance = new DefaultMutableTreeNode("Insert a new instance");
+							bean.add(instance);
+						}
+						beans.add(bean);
 					}
-					add(bean);
 				}
+				add(beans);
 			}
 		}));
 		paletteTree.setVisible(true);

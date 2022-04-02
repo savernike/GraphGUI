@@ -1,21 +1,19 @@
 package it.unirc.sapafi.gui.window;
 
+import java.awt.Cursor;
+
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTree;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 import it.unirc.sapafi.gui.menu.MenuController;
 import it.unirc.sapafi.service.FrameService;
-
-import java.util.List;
-
-import javax.swing.ImageIcon;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameEvent;
-import java.awt.Cursor;
 
 public class PaletteController {
 
@@ -51,8 +49,7 @@ public class PaletteController {
 		internalFrameGraphPalette.setVisible(true);
 		splitPane.setLeftComponent(internalFrameGraphPalette);
 		
-		FrameService frameService = new FrameService();
-		frameService.getListFrames().add(internalFrameGraphPalette);
+		FrameService.getListFrames().add(internalFrameGraphPalette);
 		internalFrameGraphPalette.getContentPane().setLayout(new BoxLayout(internalFrameGraphPalette.getContentPane(), BoxLayout.X_AXIS));
 		
 		scrollPane = new JScrollPane();

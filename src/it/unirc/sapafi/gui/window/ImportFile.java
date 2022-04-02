@@ -22,6 +22,7 @@ import it.unirc.sapafi.utils.Utils;
 public class ImportFile {
 
 	private JFileChooser fileChooser;
+	@SuppressWarnings("rawtypes")
 	private Map<Class, String> chosenClasses;
 	@SuppressWarnings("rawtypes")
 	private static List<Class> classesLoaded;
@@ -57,6 +58,7 @@ public class ImportFile {
 						e.printStackTrace();
 					}
 
+					// Choose the implemented class with graph
 					Class selectedClass = null;
 					try {
 						selectedClass = checkClassToSelect();
@@ -65,9 +67,10 @@ public class ImportFile {
 						break;
 					}
 
+					// Add the several methods and beans to the JTree in JInternalFrame
 					FrameService frameService = new FrameService();
 					try {
-						frameService.insertImplMethod(selectedClass);
+						frameService.insertImplMethod(selectedClass, ImplMethodController.getTree());
 					} catch (PropertyVetoException e) {
 						e.printStackTrace();
 					}
@@ -84,8 +87,7 @@ public class ImportFile {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private List<Class> filterClassesWithoutGraph() { // stiamo togliendo le classi con il grafo da tutte quelle che si
-														// caricano
+	private List<Class> filterClassesWithoutGraph() {
 		List<Class> classesWithoutGraph = classesLoaded;
 		for (Class c : chosenClasses.keySet()) {
 			classesWithoutGraph.remove(c);

@@ -18,8 +18,7 @@ public class DashboardController {
 		internalFrameDashboard.setVisible(true);
 		splitPane.setLeftComponent(internalFrameDashboard);
 		
-		FrameService frameService = new FrameService();
-		frameService.getListFrames().add(internalFrameDashboard);
+		FrameService.getListFrames().add(internalFrameDashboard);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		internalFrameDashboard.getContentPane().add(scrollPane, BorderLayout.CENTER);
