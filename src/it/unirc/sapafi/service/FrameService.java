@@ -1,6 +1,7 @@
 package it.unirc.sapafi.service;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.beans.PropertyVetoException;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
@@ -58,6 +59,7 @@ public class FrameService {
 			}
 		}));
 		tree.expandRow(1);
+		tree.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		frame.getContentPane().add(new JScrollPane(tree), BorderLayout.CENTER);
 	}
 

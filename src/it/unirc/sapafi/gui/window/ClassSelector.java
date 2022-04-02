@@ -95,6 +95,7 @@ public class ClassSelector extends JDialog {
 		getRootPane().setDefaultButton(okButton);
 		
 		cancelButton = new JButton("Cancel");
+		cancelButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				chooseOnExit(false);

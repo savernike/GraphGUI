@@ -15,6 +15,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import java.awt.Cursor;
 
 public class PaletteController {
 
@@ -58,6 +59,7 @@ public class PaletteController {
 		internalFrameGraphPalette.getContentPane().add(scrollPane);
 		
 		tree = new JTree();
+		tree.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		tree.setVisible(false);
 		tree.setRootVisible(false);
 		scrollPane.setViewportView(tree);

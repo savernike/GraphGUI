@@ -17,6 +17,7 @@ import it.unirc.sapafi.gui.window.ImportFile;
 import it.unirc.sapafi.gui.window.SplitPaneController;
 import it.unirc.sapafi.service.FrameService;
 import it.unirc.sapafi.utils.Utils;
+import java.awt.Cursor;
 
 public class MenuController {
 	private JMenu mnImport;
@@ -33,6 +34,9 @@ public class MenuController {
 	
 	public MenuController() {}
 
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public MenuController(JFrame frame) {
 		this.frame = frame;
 		menuBar = new JMenuBar();
@@ -55,9 +59,11 @@ public class MenuController {
 		menuBar.add(mnImport);
 
 		mnWindows = new JMenu("Window");
+		mnWindows.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		menuBar.add(mnWindows);
 
 		mntmConsole = new JCheckBoxMenuItem("Console");
+		mntmConsole.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmConsole.setName(mntmConsole.getText());
 		mntmConsole.setSelected(true);
 		mntmConsole.addActionListener(new ActionListener() {
@@ -68,6 +74,7 @@ public class MenuController {
 		mnWindows.add(mntmConsole);
 
 		mntmGraphPalette = new JCheckBoxMenuItem("Graph palette");
+		mntmGraphPalette.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmGraphPalette.setName(mntmGraphPalette.getText());
 		mntmGraphPalette.setSelected(true);
 		mntmGraphPalette.addActionListener(new ActionListener() {
@@ -79,6 +86,7 @@ public class MenuController {
 		mnWindows.add(mntmGraphPalette);
 
 		mntmMethod = new JCheckBoxMenuItem("Method");
+		mntmMethod.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mntmMethod.setName(mntmMethod.getText());
 		mntmMethod.setSelected(true);
 		mntmMethod.addActionListener(new ActionListener() {

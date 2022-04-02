@@ -26,6 +26,9 @@ public class ImportFile {
 	@SuppressWarnings("rawtypes")
 	private static List<Class> classesLoaded;
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	@SuppressWarnings("rawtypes")
 	public ImportFile() {
 
@@ -72,7 +75,6 @@ public class ImportFile {
 					try {
 						frameService.insertBeans(filterClassesWithoutGraph(), PaletteController.getTree());
 					} catch (PropertyVetoException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
@@ -86,9 +88,7 @@ public class ImportFile {
 														// caricano
 		List<Class> classesWithoutGraph = classesLoaded;
 		for (Class c : chosenClasses.keySet()) {
-
 			classesWithoutGraph.remove(c);
-
 		}
 		return classesWithoutGraph;
 	}
@@ -106,7 +106,7 @@ public class ImportFile {
 		} else {
 			ClassSelector classSelector = new ClassSelector(chosenClasses);
 			classSelector.setVisible(true);
-			if(ClassSelector.indexSelectedClass == null) {
+			if (ClassSelector.indexSelectedClass == null) {
 				throw new Exception("You have to choose at least one class with a graph to use the program");
 			}
 			res = (Class) chosenClasses.keySet().toArray()[ClassSelector.indexSelectedClass];
