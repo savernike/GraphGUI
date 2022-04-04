@@ -1,5 +1,6 @@
 package it.unirc.sapafi.gui.window;
 
+import java.awt.Color;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.net.URL;
@@ -54,6 +55,7 @@ public class ImportFile {
 					// Load class from JAR file
 					try {
 						loaderJAR(absolutePathFile);
+						
 					} catch (ClassNotFoundException | IOException e) {
 						e.printStackTrace();
 					}
@@ -80,6 +82,7 @@ public class ImportFile {
 					} catch (PropertyVetoException e) {
 						e.printStackTrace();
 					}
+					ConsoleController.writeInConsole(absolutePathFile, Color.red);//nuovo
 
 				}
 			}

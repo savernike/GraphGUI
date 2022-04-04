@@ -11,6 +11,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import it.unirc.sapafi.gui.window.ConsoleController;
 import it.unirc.sapafi.utils.Utils;
 
 public class FrameService {
