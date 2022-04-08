@@ -55,19 +55,23 @@ public class ImportFile {
 					// Load class from JAR file
 					try {
 						loaderJAR(absolutePathFile);
-						
 					} catch (ClassNotFoundException | IOException e) {
 						e.printStackTrace();
+						ConsoleController.writeInConsole("Error on loading " + absolutePathFile, Color.RED);
+						break;
 					}
+					ConsoleController.writeInConsole("File '" + absolutePathFile + "' loaded correctly", Color.GREEN);
 
 					// Choose the implemented class with graph
 					Class selectedClass = null;
 					try {
 						selectedClass = checkClassToSelect();
 					} catch (Exception e1) {
-						System.out.println(e1.getMessage());
+						e1.printStackTrace();
+						ConsoleController.writeInConsole(e1.getMessage(), Color.RED);
 						break;
 					}
+					ConsoleController.writeInConsole("Class selected: " + selectedClass.getName(), null);
 
 					// Add the several methods and beans to the JTree in JInternalFrame
 					FrameService frameService = new FrameService();
@@ -75,6 +79,7 @@ public class ImportFile {
 						frameService.insertImplMethod(selectedClass, ImplMethodController.getTree());
 					} catch (PropertyVetoException e) {
 						e.printStackTrace();
+						break;
 					}
 
 					try {
@@ -82,7 +87,7 @@ public class ImportFile {
 					} catch (PropertyVetoException e) {
 						e.printStackTrace();
 					}
-					ConsoleController.writeInConsole(absolutePathFile, Color.red);//nuovo
+//					ConsoleController.writeInConsole(absolutePathFile, Color.red);
 
 				}
 			}
