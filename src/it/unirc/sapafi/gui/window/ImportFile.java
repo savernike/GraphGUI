@@ -60,7 +60,7 @@ public class ImportFile {
 						ConsoleController.writeInConsole("Error on loading " + absolutePathFile, Color.RED);
 						break;
 					}
-					ConsoleController.writeInConsole("File '" + absolutePathFile + "' loaded correctly", Color.GREEN);
+					ConsoleController.writeInConsole("File '" + absolutePathFile + "' chosen", Color.GREEN);
 
 					// Choose the implemented class with graph
 					Class selectedClass = null;
@@ -68,10 +68,10 @@ public class ImportFile {
 						selectedClass = checkClassToSelect();
 					} catch (Exception e1) {
 						e1.printStackTrace();
-						ConsoleController.writeInConsole(e1.getMessage(), Color.RED);
+						ConsoleController.writeInConsole(e1.getMessage()+". File JAR won't be loaded", Color.RED);
 						break;
 					}
-					ConsoleController.writeInConsole("Class selected: " + selectedClass.getName(), null);
+					ConsoleController.writeInConsole("Class selected: " + selectedClass.getName(), Color.GREEN);
 
 					// Add the several methods and beans to the JTree in JInternalFrame
 					FrameService frameService = new FrameService();
